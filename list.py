@@ -1,24 +1,32 @@
-def my_project():
-    locations = [0, 0, 0]  
-    weights = [0, 0, 0]    
-    total_weight = 0          
+import random
 
-    while total_weight != 713:
-        print("\n Where the boxes could be buried?")
-        
-        for i in range(3):
-            kilometer_mark = int(input(f"Box {i + 1}: "))
-            
-            locations[i] = (locations[i] + kilometer_mark) % 10
-            weights[i] = int(input(f"Weight at {locations[i]} km: "))
-        
-        total_weight = sum(weights)
+cargo_locations = []  
+cargo_weights = []  
 
-        if total_weight == 713:
-            print("\n You found all the boxes.")
-            print("Cargo locations:", locations)
-            print("Cargo weights:", weights)
-        else:
-            print("\n The total weight is incorrect. TRY AGAIN!.")
+for i in range(3):
+  location = random.randint(1, 7)
+  weight = random.randint(100, 300)
 
-my_project()
+  cargo_locations.append(location)
+  cargo_weights.append(weight) 
+
+total_weight_found = 0
+correct_guesses = 0
+while correct_guesses < 3:
+  kilometer_mark = int(input("Enter a kilometer mark (1-7): "))
+  for i in range(3):
+    if kilometer_mark == cargo_locations[i]:
+      total_weight_found += cargo_weights[i] 
+      correct_guesses += 1  
+
+      for j in range(3):
+        if j != i:
+          cargo_locations[j] = random.randint(1, 7)
+
+      print("Cargo found at kilometer mark", kilometer_mark)
+      break
+
+if total_weight_found == 713:
+  print("All cargo found!")
+else:
+  print("Not all cargo found. Try again.")
