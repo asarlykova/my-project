@@ -12,10 +12,10 @@ def my_project():
             locations[i] = (locations[i] + kilometer_mark) % 10
             if locations[i]>7:
                 print('LOCATION is SO FAR, there may not be a box')
-         
-            weights[i] = int(input(f"Weight at {locations[i]} km: "))
-            if weights[i]==0:
-                print('TRY AGAIN!')
+            else:
+              weights[i] = int(input(f"Weight at {locations[i]} km: "))
+              if weights[i]==0:
+                  print('TRY AGAIN!')
         total_weight = sum(weights)
         if total_weight == 713:
             print("\n You found all the boxes.")
